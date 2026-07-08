@@ -21,7 +21,8 @@ This repository contains my personal notes, projects, setups, experiments, and p
 
 <!-- PROJECTS_START -->
 
-Projects will be automatically listed here.
+- [TestProject](./Projects/TestProject/README.md)  
+  This is my first test project.
 
 <!-- PROJECTS_END -->
 
