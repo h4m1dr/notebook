@@ -13,7 +13,14 @@ const IGNORE = [
 ];
 
 
-function buildTree(dir, prefix = "") {
+function formatName(name) {
+    return name
+        .replace(/[-_]/g, " ")
+        .replace(/\b\w/g, c => c.toUpperCase());
+}
+
+
+function buildTree(dir, relative = "") {
 
     let output = "";
 
@@ -22,32 +29,47 @@ function buildTree(dir, prefix = "") {
     })
     .filter(item => !IGNORE.includes(item.name))
     .sort((a, b) => {
+
         if (a.isDirectory() && !b.isDirectory()) return -1;
         if (!a.isDirectory() && b.isDirectory()) return 1;
+
         return a.name.localeCompare(b.name);
+
     });
 
 
-    items.forEach((item, index) => {
+    for (const item of items) {
 
-        const last = index === items.length - 1;
-
-        const connector = last ? "└── " : "├── ";
-
-        output += `${prefix}${connector}${item.name}\n`;
+        const fullPath = path.join(dir, item.name);
+        const itemPath = relative
+            ? `${relative}/${item.name}`
+            : item.name;
 
 
         if (item.isDirectory()) {
 
-            const nextPrefix = prefix + (last ? "    " : "│   ");
-
-            output += buildTree(
-                path.join(dir, item.name),
-                nextPrefix
+            const children = buildTree(
+                fullPath,
+                itemPath
             );
+
+
+            output += `<details>\n`;
+            output += `<summary>📁 <a href="./${itemPath}">${formatName(item.name)}</a></summary>\n\n`;
+            output += children;
+            output += `</details>\n\n`;
+
+        } else {
+
+            if (item.name.endsWith(".md")) {
+
+                output += `📄 [${formatName(item.name.replace(".md",""))}](./${itemPath})\n\n`;
+
+            }
+
         }
 
-    });
+    }
 
 
     return output;
@@ -58,6 +80,7 @@ function updateReadme() {
 
     const tree = buildTree(ROOT);
 
+
     const content = fs.readFileSync(
         README,
         "utf8"
@@ -66,7 +89,7 @@ function updateReadme() {
 
     const updated = content.replace(
         new RegExp(`${START}[\\s\\S]*?${END}`),
-        `${START}\n\n\`\`\`\n${tree}\`\`\`\n\n${END}`
+        `${START}\n\n${tree}${END}`
     );
 
 
@@ -77,9 +100,8 @@ function updateReadme() {
     );
 
 
-    console.log(
-        "Repository tree updated."
-    );
+    console.log("Interactive tree updated.");
+
 }
 
 
