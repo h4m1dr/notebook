@@ -2,18 +2,8 @@
 
 Practical guides and tutorials.
 
-Examples:
-
-- System setup
-- Server configuration
-- Deployment guides
-- Troubleshooting
-- Workflows
-
-
-## Available Guides
-
 <!-- AUTO_INDEX_START -->
 
+- [Upload Project To GitHub](./github/Upload-Project-To-GitHub.md)
 
 <!-- AUTO_INDEX_END -->
