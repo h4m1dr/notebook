@@ -1,33 +1,31 @@
 # notebook
 
-A living technical notebook where I document what I learn, build, configure, and discover.
+A personal technical notebook where I document projects, guides, experiments, and reusable resources.
 
-This repository contains my personal notes, projects, setups, experiments, and practical guides.
-
----
-
-# Topics
-
-- [AI](./Topics/AI/README.md)
-- [Servers](./Topics/Servers/README.md)
-- [Cloud](./Topics/Cloud/README.md)
-- [Networking](./Topics/Networking/README.md)
-- [DevOps](./Topics/DevOps/README.md)
-- [Tools](./Topics/Tools/README.md)
+This repository grows with my learning process and contains practical documentation, configurations, and project notes.
 
 ---
 
-# Projects
+## Structure
 
-<!-- PROJECTS_START -->
+<!-- AUTO_INDEX_START -->
 
-- [TestProject](./Projects/TestProject/README.md)  
-  This is my first test project.
+- [Guides](./Guides/README.md)
+- [Projects](./Projects/README.md)
+- [Templates](./Templates/README.md)
+- [Automation](./Automation/README.md)
 
-<!-- PROJECTS_END -->
+<!-- AUTO_INDEX_END -->
 
 ---
 
-# Guides
+## About
 
-General guides and reusable documentation.
+This is a living documentation repository.
+
+Content is organized by purpose:
+
+- Guides → How-to documentation and tutorials
+- Projects → Personal and public projects
+- Templates → Reusable files and examples
+- Automation → Tools that maintain this repository
