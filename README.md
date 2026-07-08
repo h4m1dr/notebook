@@ -5,23 +5,6 @@ A personal technical notebook.
 <!-- TREE_START -->
 
 <details>
-<summary>📁 <a href="./Automation">Automation</a></summary>
-
-<details>
-<summary>📁 <a href="./Automation/config">Config</a></summary>
-
-</details>
-
-<details>
-<summary>📁 <a href="./Automation/scripts">Scripts</a></summary>
-
-</details>
-
-📄 [README](./Automation/README.md)
-
-</details>
-
-<details>
 <summary>📁 <a href="./Guides">Guides</a></summary>
 
 <details>
@@ -46,8 +29,6 @@ A personal technical notebook.
 
 </details>
 
-📄 [README](./Guides/README.md)
-
 </details>
 
 <details>
@@ -71,16 +52,12 @@ A personal technical notebook.
 <details>
 <summary>📁 <a href="./Projects/TestProject2">TestProject2</a></summary>
 
-📄 [README](./Projects/TestProject2/README.md)
-
 </details>
 
 <details>
 <summary>📁 <a href="./Projects/ubuntu">Ubuntu</a></summary>
 
 </details>
-
-📄 [README](./Projects/README.md)
 
 </details>
 
@@ -104,18 +81,14 @@ A personal technical notebook.
 
 </details>
 
+📄 [README Template](./Templates/README-template.md)
+
 <details>
 <summary>📁 <a href="./Templates/ubuntu">Ubuntu</a></summary>
 
 </details>
 
-📄 [README Template](./Templates/README-template.md)
-
-📄 [README](./Templates/README.md)
-
 </details>
-
-📄 [README](./README.md)
 
 <!-- TREE_END -->
 

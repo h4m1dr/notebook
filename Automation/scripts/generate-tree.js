@@ -7,68 +7,65 @@ const README = path.join(ROOT, "README.md");
 const START = "<!-- TREE_START -->";
 const END = "<!-- TREE_END -->";
 
-const IGNORE = [
-    ".git",
-    "node_modules"
+const SHOW_ROOT = [
+    "Guides",
+    "Projects",
+    "Templates"
 ];
 
 
-function formatName(name) {
+const IGNORE = [
+    ".git",
+    "Automation",
+    "README.md"
+];
+
+
+function nameFormat(name) {
     return name
         .replace(/[-_]/g, " ")
-        .replace(/\b\w/g, c => c.toUpperCase());
+        .replace(".md", "")
+        .replace(/\b\w/g, x => x.toUpperCase());
 }
 
 
-function buildTree(dir, relative = "") {
+function buildFolder(folder, relative) {
 
     let output = "";
 
-    const items = fs.readdirSync(dir, {
+    const items = fs.readdirSync(folder, {
         withFileTypes: true
     })
-    .filter(item => !IGNORE.includes(item.name))
-    .sort((a, b) => {
-
-        if (a.isDirectory() && !b.isDirectory()) return -1;
-        if (!a.isDirectory() && b.isDirectory()) return 1;
-
-        return a.name.localeCompare(b.name);
-
-    });
+    .filter(x => !IGNORE.includes(x.name));
 
 
     for (const item of items) {
 
-        const fullPath = path.join(dir, item.name);
-        const itemPath = relative
-            ? `${relative}/${item.name}`
-            : item.name;
+        const full = path.join(folder, item.name);
+
+        const link = "./" + path
+            .relative(ROOT, full)
+            .replaceAll("\\", "/");
 
 
         if (item.isDirectory()) {
 
-            const children = buildTree(
-                fullPath,
-                itemPath
-            );
-
-
             output += `<details>\n`;
-            output += `<summary>📁 <a href="./${itemPath}">${formatName(item.name)}</a></summary>\n\n`;
-            output += children;
+            output += `<summary>📁 <a href="${link}">${nameFormat(item.name)}</a></summary>\n\n`;
+
+            output += buildFolder(full, link);
+
             output += `</details>\n\n`;
 
         } else {
 
             if (item.name.endsWith(".md")) {
 
-                output += `📄 [${formatName(item.name.replace(".md",""))}](./${itemPath})\n\n`;
+                output += `📄 [${nameFormat(item.name)}](${link})\n\n`;
 
             }
 
         }
-
     }
 
 
@@ -76,18 +73,39 @@ function buildTree(dir, relative = "") {
 }
 
 
-function updateReadme() {
 
-    const tree = buildTree(ROOT);
+function generate() {
+
+    let tree = "";
 
 
-    const content = fs.readFileSync(
+    for (const folder of SHOW_ROOT) {
+
+        const full = path.join(ROOT, folder);
+
+        const link = "./" + folder;
+
+
+        tree += `<details>\n`;
+        tree += `<summary>📁 <a href="${link}">${folder}</a></summary>\n\n`;
+
+        tree += buildFolder(
+            full,
+            link
+        );
+
+        tree += `</details>\n\n`;
+
+    }
+
+
+    let readme = fs.readFileSync(
         README,
         "utf8"
     );
 
 
-    const updated = content.replace(
+    readme = readme.replace(
         new RegExp(`${START}[\\s\\S]*?${END}`),
         `${START}\n\n${tree}${END}`
     );
@@ -95,14 +113,13 @@ function updateReadme() {
 
     fs.writeFileSync(
         README,
-        updated,
+        readme,
         "utf8"
     );
 
 
-    console.log("Interactive tree updated.");
-
+    console.log("README tree updated.");
 }
 
 
-updateReadme();
+generate();
