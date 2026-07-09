@@ -1,6 +1,6 @@
 function formatName(name) {
 
-    return name
+    return String(name)
         .replace(/[-_]/g, " ")
         .replace(".md", "")
         .replace(/\b\w/g, c => c.toUpperCase());
@@ -9,73 +9,76 @@ function formatName(name) {
 
 
 
-function treeLine(level, last) {
+function treePrefix(level, last) {
 
     if (level === 0) {
         return "";
     }
 
 
-    let line = "";
+    let prefix = "";
 
 
     for (let i = 1; i < level; i++) {
 
-        line += "│   ";
+        prefix += "│   ";
 
     }
 
 
-    line += last
+    prefix += last
         ? "└── "
         : "├── ";
 
 
-    return line;
+    return prefix;
 
 }
 
 
 
-function renderTree(node, level = 0, isRoot = false, last = true) {
-
+function renderTree(node, level = 0) {
 
     let output = "";
 
 
-    const prefix = treeLine(
+    const prefix = treePrefix(
         level,
-        last
+        node.last
     );
+
+
+    const icon = node.type === "file"
+        ? "📄"
+        : "📁";
 
 
 
     if (node.type === "folder") {
 
 
-        output += `<details${isRoot ? " open" : ""}>\n`;
+        output += `<details>\n`;
 
         output += `<summary>\n`;
 
-        output += `${prefix}📁 <a href="${node.path}">${formatName(node.name)}</a>\n`;
+        output += `${prefix}${icon} <a href="${node.path}">${formatName(node.name)}</a>\n`;
 
         output += `</summary>\n\n`;
 
 
 
-        if (node.children && node.children.length) {
+        if (
+            node.children &&
+            node.children.length > 0
+        ) {
 
 
-            node.children.forEach((child, index) => {
-
+            node.children.forEach(child => {
 
                 output += renderTree(
                     child,
-                    level + 1,
-                    false,
-                    index === node.children.length - 1
+                    level + 1
                 );
-
 
             });
 
@@ -85,14 +88,12 @@ function renderTree(node, level = 0, isRoot = false, last = true) {
 
         output += `</details>\n\n`;
 
+
     }
+    else {
 
 
-
-    if (node.type === "file") {
-
-
-        output += `${prefix}📄 <a href="${node.path}">${formatName(node.name)}</a>\n\n`;
+        output += `${prefix}${icon} <a href="${node.path}">${formatName(node.name)}</a>\n\n`;
 
     }
 

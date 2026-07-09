@@ -4,7 +4,7 @@ A personal technical notebook.
 
 <!-- TREE_START -->
 
-<details open>
+<details>
 <summary>
 📁 <a href="./Guides">Guides</a>
 </summary>
@@ -42,7 +42,7 @@ A personal technical notebook.
 </details>
 
 
-<details open>
+<details>
 <summary>
 📁 <a href="./Projects">Projects</a>
 </summary>
@@ -85,7 +85,7 @@ A personal technical notebook.
 </details>
 
 
-<details open>
+<details>
 <summary>
 📁 <a href="./Templates">Templates</a>
 </summary>
