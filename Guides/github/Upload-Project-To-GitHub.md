@@ -1,68 +1,100 @@
-# Upload Project to GitHub
-
-This guide explains the complete workflow for publishing and maintaining a Git project on GitHub. It covers everything from creating a new repository to updating an existing one.
-
 ---
 
-# Initial Upload
+# Check Repository Status
 
-Use this workflow when your project has never been uploaded to GitHub before.
+Use these commands to inspect your local repository.
 
-## 1. Initialize a Git repository
-
-Creates a new local Git repository in the current directory.
-
-```bash
-git init
-```
-
----
-
-## 2. Check the repository status
-
-Shows tracked and untracked files before creating your first commit.
+### Show current status
 
 ```bash
 git status
 ```
 
----
+Displays:
 
-## 3. Stage all files
-
-Adds every file in the current directory to the staging area.
-
-```bash
-git add .
-```
-
-To add only a specific file:
-
-```bash
-git add README.md
-```
+* Modified files
+* New files
+* Deleted files
+* Current branch
+* Staged changes
 
 ---
 
-## 4. Create the first commit
-
-Saves the current staged files into the repository history.
+### View commit history
 
 ```bash
-git commit -m "Initial commit"
+git log
 ```
+
+Shows the complete commit history.
 
 ---
 
-## 5. Rename the default branch
-
-Most repositories use `main` as the default branch.
+### Short history
 
 ```bash
-git branch -M main
+git log --oneline
 ```
 
-Check the current branch:
+Displays one commit per line.
+
+---
+
+### Show differences
+
+```bash
+git diff
+```
+
+Shows unstaged changes.
+
+---
+
+### Show staged changes
+
+```bash
+git diff --cached
+```
+
+Displays changes that will be included in the next commit.
+
+---
+
+# Remote Repository
+
+### List remotes
+
+```bash
+git remote -v
+```
+
+Shows all configured remote repositories.
+
+---
+
+### Change remote URL
+
+```bash
+git remote set-url origin NEW_URL
+```
+
+Updates the repository URL.
+
+---
+
+### Remove remote
+
+```bash
+git remote remove origin
+```
+
+Deletes the configured remote.
+
+---
+
+# Branches
+
+### List branches
 
 ```bash
 git branch
@@ -70,35 +102,81 @@ git branch
 
 ---
 
-## 6. Connect the local repository to GitHub
-
-Replace the URL with your repository.
+### Show remote branches
 
 ```bash
-git remote add origin https://github.com/USERNAME/REPOSITORY.git
-```
-
-Verify the remote:
-
-```bash
-git remote -v
+git branch -r
 ```
 
 ---
 
-## 7. Push the project
-
-Uploads the local repository to GitHub.
+### Show all branches
 
 ```bash
-git push -u origin main
+git branch -a
 ```
 
-The `-u` option sets the upstream branch so future pushes only require:
+---
+
+### Create a branch
+
+```bash
+git branch feature/login
+```
+
+---
+
+### Switch branch
+
+```bash
+git checkout feature/login
+```
+
+or
+
+```bash
+git switch feature/login
+```
+
+---
+
+### Create and switch
+
+```bash
+git checkout -b feature/login
+```
+
+---
+
+# Synchronization
+
+### Download remote changes
+
+```bash
+git fetch
+```
+
+Downloads new commits without merging.
+
+---
+
+### Download and merge
+
+```bash
+git pull
+```
+
+Updates the current branch.
+
+---
+
+### Upload commits
 
 ```bash
 git push
 ```
+
+Uploads local commits.
 
 ---
 
