@@ -1,41 +1,52 @@
----
-title: Upload Project To GitHub
-type: guide
-category: git
-status: published
----
+# Upload Project to GitHub
 
-# Upload Project To GitHub
-
-A simple guide for uploading a local project to GitHub.
-
-## Requirements
-
-- Git installed
-- GitHub account
-- Repository created on GitHub
+This guide explains the complete workflow for publishing and maintaining a Git project on GitHub. It covers everything from creating a new repository to updating an existing one.
 
 ---
 
-## Initialize Git
+# Initial Upload
 
-Open terminal inside your project folder:
+Use this workflow when your project has never been uploaded to GitHub before.
+
+## 1. Initialize a Git repository
+
+Creates a new local Git repository in the current directory.
 
 ```bash
 git init
-````
+```
 
 ---
 
-## Add Files
+## 2. Check the repository status
+
+Shows tracked and untracked files before creating your first commit.
+
+```bash
+git status
+```
+
+---
+
+## 3. Stage all files
+
+Adds every file in the current directory to the staging area.
 
 ```bash
 git add .
 ```
 
+To add only a specific file:
+
+```bash
+git add README.md
+```
+
 ---
 
-## Create First Commit
+## 4. Create the first commit
+
+Saves the current staged files into the repository history.
 
 ```bash
 git commit -m "Initial commit"
@@ -43,75 +54,151 @@ git commit -m "Initial commit"
 
 ---
 
-## Connect Remote Repository
+## 5. Rename the default branch
 
-```bash
-git remote add origin YOUR_REPOSITORY_URL
-```
-
-Example:
-
-```bash
-git remote add origin https://github.com/username/project.git
-```
-
----
-
-## Push Project
+Most repositories use `main` as the default branch.
 
 ```bash
 git branch -M main
+```
 
+Check the current branch:
+
+```bash
+git branch
+```
+
+---
+
+## 6. Connect the local repository to GitHub
+
+Replace the URL with your repository.
+
+```bash
+git remote add origin https://github.com/USERNAME/REPOSITORY.git
+```
+
+Verify the remote:
+
+```bash
+git remote -v
+```
+
+---
+
+## 7. Push the project
+
+Uploads the local repository to GitHub.
+
+```bash
 git push -u origin main
 ```
 
----
+The `-u` option sets the upstream branch so future pushes only require:
 
-## Notes
-
-Never upload:
-
-* API keys
-* Passwords
-* Private tokens
-* `.env` files
-
-Use `.gitignore` and environment variables instead.
-
-````
-
----
-
-حالا برای تست دستی:
-
-بزن:
-
-```cmd
-tree /a /f
-````
-
-باید این را ببینی:
-
-```text
-Guides
-│   README.md
-│   Upload-Project-To-GitHub.md
+```bash
+git push
 ```
 
 ---
 
-حالا یک چیز مهم را تست می‌کنیم:
+# Daily Workflow
 
-فعلاً `Guides/README.md` خالی است.
+Use these steps every time you make changes to your project.
 
-بعداً اسکریپت باید آن را تبدیل کند به:
+---
 
-```md
-# Guides
+## 1. Check changed files
 
-## Available Guides
+View modified, deleted, and newly created files.
 
-- [Upload Project To GitHub](./Upload-Project-To-GitHub.md)
+```bash
+git status
+```
+
+---
+
+## 2. Review changes
+
+See exactly what has changed before committing.
+
+```bash
+git diff
+```
+
+---
+
+## 3. Stage the changes
+
+Stage every modified file.
+
+```bash
+git add .
+```
+
+Or stage only one file.
+
+```bash
+git add src/index.js
+```
+
+---
+
+## 4. Create a commit
+
+Write a meaningful commit message describing your changes.
+
+```bash
+git commit -m "Add authentication support"
+```
+
+---
+
+## 5. Download remote changes
+
+Fetch the latest information from GitHub without merging.
+
+```bash
+git fetch
+```
+
+---
+
+## 6. Pull the latest changes
+
+Merge remote updates into your local branch.
+
+```bash
+git pull
+```
+
+Or use rebase.
+
+```bash
+git pull --rebase
+```
+
+---
+
+## 7. Upload your changes
+
+Push your commits to GitHub.
+
+```bash
+git push
+```
+
+---
+
+## Complete Daily Workflow
+
+```bash
+git status
+git diff
+git add .
+git commit -m "Describe your changes"
+git pull --rebase
+git push
 ```
 
 ---
