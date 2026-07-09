@@ -9,13 +9,44 @@ function formatName(name) {
 
 
 
-function renderTree(node, level = 0, isRoot = false) {
+function treeLine(level, last) {
+
+    if (level === 0) {
+        return "";
+    }
+
+
+    let line = "";
+
+
+    for (let i = 1; i < level; i++) {
+
+        line += "│   ";
+
+    }
+
+
+    line += last
+        ? "└── "
+        : "├── ";
+
+
+    return line;
+
+}
+
+
+
+function renderTree(node, level = 0, isRoot = false, last = true) {
 
 
     let output = "";
 
 
-    const indent = "&nbsp;&nbsp;&nbsp;&nbsp;".repeat(level);
+    const prefix = treeLine(
+        level,
+        last
+    );
 
 
 
@@ -26,42 +57,33 @@ function renderTree(node, level = 0, isRoot = false) {
 
         output += `<summary>\n`;
 
-        output += `${indent}📁 <a href="${node.path}">${formatName(node.name)}</a>\n`;
+        output += `${prefix}📁 <a href="${node.path}">${formatName(node.name)}</a>\n`;
 
         output += `</summary>\n\n`;
 
 
 
-        if (node.children && node.children.length > 0) {
-
-
-            output += `<div style="margin-left:${25 * (level + 1)}px">\n\n`;
+        if (node.children && node.children.length) {
 
 
             node.children.forEach((child, index) => {
 
 
-                const last = index === node.children.length - 1;
-
-
                 output += renderTree(
                     child,
                     level + 1,
-                    false
+                    false,
+                    index === node.children.length - 1
                 );
 
 
             });
 
 
-            output += `</div>\n\n`;
-
         }
 
 
-
         output += `</details>\n\n`;
-
 
     }
 
@@ -70,8 +92,7 @@ function renderTree(node, level = 0, isRoot = false) {
     if (node.type === "file") {
 
 
-        output += `${indent}📄 <a href="${node.path}">${formatName(node.name)}</a>\n\n`;
-
+        output += `${prefix}📄 <a href="${node.path}">${formatName(node.name)}</a>\n\n`;
 
     }
 

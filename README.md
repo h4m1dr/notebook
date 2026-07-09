@@ -9,43 +9,35 @@ A personal technical notebook.
 📁 <a href="./Guides">Guides</a>
 </summary>
 
-<div style="margin-left:25px">
-
 <details>
 <summary>
-&nbsp;&nbsp;&nbsp;&nbsp;📁 <a href="./Guides/cloudflare">Cloudflare</a>
+├── 📁 <a href="./Guides/cloudflare">Cloudflare</a>
 </summary>
 
 </details>
 
 <details>
 <summary>
-&nbsp;&nbsp;&nbsp;&nbsp;📁 <a href="./Guides/github">Github</a>
+├── 📁 <a href="./Guides/github">Github</a>
 </summary>
 
-<div style="margin-left:50px">
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;📄 <a href="./Guides/github/Upload-Project-To-GitHub.md">Upload Project To GitHub</a>
-
-</div>
+│   └── 📄 <a href="./Guides/github/Upload-Project-To-GitHub.md">Upload Project To GitHub</a>
 
 </details>
 
 <details>
 <summary>
-&nbsp;&nbsp;&nbsp;&nbsp;📁 <a href="./Guides/huggingface">Huggingface</a>
+├── 📁 <a href="./Guides/huggingface">Huggingface</a>
 </summary>
 
 </details>
 
 <details>
 <summary>
-&nbsp;&nbsp;&nbsp;&nbsp;📁 <a href="./Guides/ubuntu">Ubuntu</a>
+└── 📁 <a href="./Guides/ubuntu">Ubuntu</a>
 </summary>
 
 </details>
-
-</div>
 
 </details>
 
@@ -55,44 +47,40 @@ A personal technical notebook.
 📁 <a href="./Projects">Projects</a>
 </summary>
 
-<div style="margin-left:25px">
-
 <details>
 <summary>
-&nbsp;&nbsp;&nbsp;&nbsp;📁 <a href="./Projects/BrokenTest">BrokenTest</a>
+├── 📁 <a href="./Projects/BrokenTest">BrokenTest</a>
 </summary>
 
 </details>
 
 <details>
 <summary>
-&nbsp;&nbsp;&nbsp;&nbsp;📁 <a href="./Projects/cloudflare">Cloudflare</a>
+├── 📁 <a href="./Projects/cloudflare">Cloudflare</a>
 </summary>
 
 </details>
 
 <details>
 <summary>
-&nbsp;&nbsp;&nbsp;&nbsp;📁 <a href="./Projects/huggingface">Huggingface</a>
+├── 📁 <a href="./Projects/huggingface">Huggingface</a>
 </summary>
 
 </details>
 
 <details>
 <summary>
-&nbsp;&nbsp;&nbsp;&nbsp;📁 <a href="./Projects/TestProject2">TestProject2</a>
+├── 📁 <a href="./Projects/TestProject2">TestProject2</a>
 </summary>
 
 </details>
 
 <details>
 <summary>
-&nbsp;&nbsp;&nbsp;&nbsp;📁 <a href="./Projects/ubuntu">Ubuntu</a>
+└── 📁 <a href="./Projects/ubuntu">Ubuntu</a>
 </summary>
 
 </details>
-
-</div>
 
 </details>
 
@@ -102,49 +90,41 @@ A personal technical notebook.
 📁 <a href="./Templates">Templates</a>
 </summary>
 
-<div style="margin-left:25px">
-
 <details>
 <summary>
-&nbsp;&nbsp;&nbsp;&nbsp;📁 <a href="./Templates/cloudflare">Cloudflare</a>
+├── 📁 <a href="./Templates/cloudflare">Cloudflare</a>
 </summary>
 
 </details>
 
 <details>
 <summary>
-&nbsp;&nbsp;&nbsp;&nbsp;📁 <a href="./Templates/github">Github</a>
+├── 📁 <a href="./Templates/github">Github</a>
 </summary>
 
-<div style="margin-left:50px">
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;📄 <a href="./Templates/github/Upload-Project-To-GitHub.md">Upload Project To GitHub</a>
-
-</div>
+│   └── 📄 <a href="./Templates/github/Upload-Project-To-GitHub.md">Upload Project To GitHub</a>
 
 </details>
 
 <details>
 <summary>
-&nbsp;&nbsp;&nbsp;&nbsp;📁 <a href="./Templates/huggingface">Huggingface</a>
+├── 📁 <a href="./Templates/huggingface">Huggingface</a>
 </summary>
 
 </details>
 
 <details>
 <summary>
-&nbsp;&nbsp;&nbsp;&nbsp;📁 <a href="./Templates/ubuntu">Ubuntu</a>
+├── 📁 <a href="./Templates/ubuntu">Ubuntu</a>
 </summary>
 
 </details>
 
-&nbsp;&nbsp;&nbsp;&nbsp;📄 <a href="./Templates/.env.example">.Env.Example</a>
+├── 📄 <a href="./Templates/.env.example">.Env.Example</a>
 
-&nbsp;&nbsp;&nbsp;&nbsp;📄 <a href="./Templates/config.example">Config.Example</a>
+├── 📄 <a href="./Templates/config.example">Config.Example</a>
 
-&nbsp;&nbsp;&nbsp;&nbsp;📄 <a href="./Templates/README-template.md">README Template</a>
-
-</div>
+└── 📄 <a href="./Templates/README-template.md">README Template</a>
 
 </details>
 
