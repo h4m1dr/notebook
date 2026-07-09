@@ -29,37 +29,62 @@ function formatName(name) {
     return name
         .replace(/[-_]/g, " ")
         .replace(".md", "")
-        .replace(/\b\w/g, char => char.toUpperCase());
+        .replace(/\b\w/g, c => c.toUpperCase());
 
 }
 
 
 
-function indent(level) {
+function treePrefix(level, last) {
 
-    return "&nbsp;&nbsp;&nbsp;&nbsp;".repeat(level);
+    if (level === 0) {
+        return "";
+    }
+
+
+    let prefix = "";
+
+
+    for (let i = 1; i < level; i++) {
+        prefix += "│   ";
+    }
+
+
+    prefix += last ? "└── " : "├── ";
+
+    return prefix;
 
 }
 
 
 
-function scanFolder(folder, level) {
+function scanFolder(folder, level = 0) {
 
     let output = "";
 
     const items = fs.readdirSync(folder, {
         withFileTypes: true
+    })
+    .filter(item => item.name !== "README.md")
+    .sort((a, b) => {
+
+        if (a.isDirectory() && !b.isDirectory()) {
+            return -1;
+        }
+
+        if (!a.isDirectory() && b.isDirectory()) {
+            return 1;
+        }
+
+        return a.name.localeCompare(b.name);
+
     });
 
 
-    for (const item of items) {
+    items.forEach((item, index) => {
 
-        if (
-            item.name === "README.md" ||
-            item.name === ".git"
-        ) {
-            continue;
-        }
+
+        const isLast = index === items.length - 1;
 
 
         const fullPath = path.join(
@@ -73,13 +98,18 @@ function scanFolder(folder, level) {
             .replace(/\\/g, "/");
 
 
+        const prefix = treePrefix(
+            level,
+            isLast
+        );
+
 
         if (item.isDirectory()) {
 
 
-            output += `${indent(level)}<details>\n`;
+            output += `<details>\n`;
 
-            output += `${indent(level)}<summary>📁 <a href="./${relative}">${formatName(item.name)}</a></summary>\n\n`;
+            output += `<summary>${prefix}📁 <a href="./${relative}">${formatName(item.name)}</a></summary>\n\n`;
 
 
             output += scanFolder(
@@ -88,10 +118,9 @@ function scanFolder(folder, level) {
             );
 
 
-            output += `${indent(level)}</details>\n\n`;
+            output += `</details>\n\n`;
 
         }
-
 
 
         if (
@@ -99,11 +128,12 @@ function scanFolder(folder, level) {
             item.name.endsWith(".md")
         ) {
 
-            output += `${indent(level)}- 📄 <a href="./${relative}">${formatName(item.name)}</a>\n\n`;
+            output += `${prefix}📄 <a href="./${relative}">${formatName(item.name)}</a>\n\n`;
 
         }
 
-    }
+
+    });
 
 
     return output;
@@ -112,7 +142,7 @@ function scanFolder(folder, level) {
 
 
 
-function createSection(section) {
+function generateSection(section) {
 
 
     const folder = path.join(
@@ -136,7 +166,7 @@ function createSection(section) {
 
     output += scanFolder(
         folder,
-        1
+        0
     );
 
 
@@ -156,7 +186,7 @@ function generate() {
 
     for (const section of SECTIONS) {
 
-        output += createSection(section);
+        output += generateSection(section);
 
     }
 
@@ -168,7 +198,6 @@ function generate() {
 
 
 function update() {
-
 
     let content = fs.readFileSync(
         README,
