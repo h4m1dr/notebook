@@ -13,30 +13,70 @@ function formatName(name) {
     return name
         .replace(/[-_]/g, " ")
         .replace(".md", "")
-        .replace(/\b\w/g, char => char.toUpperCase());
+        .replace(/\b\w/g, c => c.toUpperCase());
 
 }
 
 
 
-function scanDirectory(dir) {
+function treePrefix(level, last) {
+
+    if (level === 0) {
+        return "";
+    }
+
+
+    let prefix = "";
+
+
+    for (let i = 1; i < level; i++) {
+
+        prefix += "│   ";
+
+    }
+
+
+    prefix += last ? "└── " : "├── ";
+
+    return prefix;
+
+}
+
+
+
+function scanFolder(folder, level = 0) {
 
     let output = "";
 
-    const items = fs.readdirSync(dir, {
+
+    const items = fs.readdirSync(folder, {
         withFileTypes: true
+    })
+    .filter(item => item.name !== "README.md")
+    .sort((a, b) => {
+
+        if (a.isDirectory() && !b.isDirectory()) {
+            return -1;
+        }
+
+        if (!a.isDirectory() && b.isDirectory()) {
+            return 1;
+        }
+
+        return a.name.localeCompare(b.name);
+
     });
 
 
-    for (const item of items) {
 
-        if (item.name === "README.md") {
-            continue;
-        }
+    items.forEach((item, index) => {
+
+
+        const last = index === items.length - 1;
 
 
         const fullPath = path.join(
-            dir,
+            folder,
             item.name
         );
 
@@ -46,27 +86,31 @@ function scanDirectory(dir) {
             .replace(/\\/g, "/");
 
 
+        const prefix = treePrefix(
+            level,
+            last
+        );
+
+
+
         if (item.isDirectory()) {
 
-            output += `\n- 📁 [${formatName(item.name)}](./${relative})\n`;
 
-            const children = scanDirectory(
-                fullPath
+            output += `<details>\n`;
+
+            output += `<summary>${prefix}📁 <a href="./${relative}">${formatName(item.name)}</a></summary>\n\n`;
+
+
+            output += scanFolder(
+                fullPath,
+                level + 1
             );
 
 
-            if (children.trim()) {
-
-                output += children
-                    .split("\n")
-                    .map(line => "    " + line)
-                    .join("\n");
-
-                output += "\n";
-
-            }
+            output += `</details>\n\n`;
 
         }
+
 
 
         if (
@@ -74,23 +118,14 @@ function scanDirectory(dir) {
             item.name.endsWith(".md")
         ) {
 
-            output += `\n- 📄 [${formatName(item.name)}](./${relative})\n`;
+            output += `${prefix}📄 <a href="./${relative}">${formatName(item.name)}</a>\n\n`;
 
         }
 
-    }
+    });
 
 
     return output;
-
-}
-
-
-
-function generateIndex() {
-
-    return scanDirectory(ROOT)
-        .trim();
 
 }
 
@@ -104,7 +139,9 @@ function updateReadme() {
     );
 
 
-    const index = generateIndex();
+    const index = scanFolder(
+        ROOT
+    );
 
 
     content = content.replace(
@@ -125,6 +162,7 @@ function updateReadme() {
     );
 
 }
+
 
 
 updateReadme();

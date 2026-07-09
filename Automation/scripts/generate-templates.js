@@ -13,121 +13,146 @@ function formatName(name) {
     return name
         .replace(/[-_]/g, " ")
         .replace(".md", "")
-        .replace(/\b\w/g, char => char.toUpperCase());
+        .replace(/\b\w/g, c => c.toUpperCase());
 
 }
 
 
-function scan(dir) {
 
-    let items = [];
+function treePrefix(level, last) {
 
-    const files = fs.readdirSync(dir, {
-        withFileTypes: true
-    });
-
-
-    for (const file of files) {
-
-        if (file.name === "README.md") {
-            continue;
-        }
+    if (level === 0) {
+        return "";
+    }
 
 
-        const fullPath = path.join(
-            dir,
-            file.name
-        );
+    let prefix = "";
 
 
-        if (file.isDirectory()) {
+    for (let i = 1; i < level; i++) {
 
-            items.push({
-                type: "folder",
-                name: file.name,
-                path: fullPath
-            });
-
-        }
-
-
-        if (
-            file.isFile() &&
-            file.name.endsWith(".md")
-        ) {
-
-            items.push({
-                type: "file",
-                name: file.name,
-                path: fullPath
-            });
-
-        }
+        prefix += "│   ";
 
     }
 
 
-    return items;
+    prefix += last ? "└── " : "├── ";
+
+    return prefix;
 
 }
 
 
-function generate() {
 
-    const items = scan(ROOT);
+function scanFolder(folder, level = 0) {
 
     let output = "";
 
 
-    for (const item of items) {
+    const items = fs.readdirSync(folder, {
+        withFileTypes: true
+    })
+    .filter(item => item.name !== "README.md")
+    .sort((a, b) => {
+
+        if (a.isDirectory() && !b.isDirectory()) {
+            return -1;
+        }
+
+        if (!a.isDirectory() && b.isDirectory()) {
+            return 1;
+        }
+
+        return a.name.localeCompare(b.name);
+
+    });
+
+
+
+    items.forEach((item, index) => {
+
+
+        const last = index === items.length - 1;
+
+
+        const fullPath = path.join(
+            folder,
+            item.name
+        );
+
 
         const relative = path
-            .relative(ROOT, item.path)
+            .relative(ROOT, fullPath)
             .replace(/\\/g, "/");
 
 
-        if (item.type === "folder") {
+        const prefix = treePrefix(
+            level,
+            last
+        );
 
-            output += `- 📁 [${formatName(item.name)}](./${relative})\n`;
+
+
+        if (item.isDirectory()) {
+
+
+            output += `<details>\n`;
+
+            output += `<summary>${prefix}📁 <a href="./${relative}">${formatName(item.name)}</a></summary>\n\n`;
+
+
+            output += scanFolder(
+                fullPath,
+                level + 1
+            );
+
+
+            output += `</details>\n\n`;
 
         }
 
 
-        if (item.type === "file") {
 
-            output += `- 📄 [${formatName(item.name)}](./${relative})\n`;
+        if (
+            item.isFile() &&
+            item.name.endsWith(".md")
+        ) {
+
+            output += `${prefix}📄 <a href="./${relative}">${formatName(item.name)}</a>\n\n`;
 
         }
 
-    }
+    });
 
 
-    return output.trim();
+    return output;
 
 }
 
 
 
-function update() {
+function updateReadme() {
 
-    const content = fs.readFileSync(
+    let content = fs.readFileSync(
         README,
         "utf8"
     );
 
 
-    const output = generate();
+    const index = scanFolder(
+        ROOT
+    );
 
 
-    const updated = content.replace(
+    content = content.replace(
         new RegExp(`${START}[\\s\\S]*?${END}`),
-        `${START}\n\n${output}\n\n${END}`
+        `${START}\n\n${index}\n\n${END}`
     );
 
 
     fs.writeFileSync(
         README,
-        updated,
+        content,
         "utf8"
     );
 
@@ -139,4 +164,5 @@ function update() {
 }
 
 
-update();
+
+updateReadme();

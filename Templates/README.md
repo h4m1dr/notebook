@@ -13,10 +13,30 @@ Examples:
 
 <!-- AUTO_INDEX_START -->
 
-- 📁 [Cloudflare](./cloudflare)
-- 📁 [Github](./github)
-- 📁 [Huggingface](./huggingface)
-- 📄 [README Template](./README-template.md)
-- 📁 [Ubuntu](./ubuntu)
+<details>
+<summary>📁 <a href="./cloudflare">Cloudflare</a></summary>
+
+</details>
+
+<details>
+<summary>📁 <a href="./github">Github</a></summary>
+
+└── 📄 <a href="./github/Upload-Project-To-GitHub.md">Upload Project To GitHub</a>
+
+</details>
+
+<details>
+<summary>📁 <a href="./huggingface">Huggingface</a></summary>
+
+</details>
+
+<details>
+<summary>📁 <a href="./ubuntu">Ubuntu</a></summary>
+
+</details>
+
+📄 <a href="./README-template.md">README Template</a>
+
+
 
 <!-- AUTO_INDEX_END -->

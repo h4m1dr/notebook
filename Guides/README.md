@@ -4,15 +4,28 @@ Practical guides and tutorials.
 
 <!-- AUTO_INDEX_START -->
 
-- 📁 [Cloudflare](./cloudflare)
+<details>
+<summary>📁 <a href="./cloudflare">Cloudflare</a></summary>
 
-- 📁 [Github](./github)
-    
-    - 📄 [Upload Project To GitHub](./github/Upload-Project-To-GitHub.md)
-    
+</details>
 
-- 📁 [Huggingface](./huggingface)
+<details>
+<summary>📁 <a href="./github">Github</a></summary>
 
-- 📁 [Ubuntu](./ubuntu)
+└── 📄 <a href="./github/Upload-Project-To-GitHub.md">Upload Project To GitHub</a>
+
+</details>
+
+<details>
+<summary>📁 <a href="./huggingface">Huggingface</a></summary>
+
+</details>
+
+<details>
+<summary>📁 <a href="./ubuntu">Ubuntu</a></summary>
+
+</details>
+
+
 
 <!-- AUTO_INDEX_END -->
