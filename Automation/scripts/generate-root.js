@@ -35,7 +35,7 @@ function formatName(name) {
 
 
 
-function scanFolder(folder, base) {
+function scanFolder(folder, level = 0) {
 
     let output = "";
 
@@ -65,28 +65,26 @@ function scanFolder(folder, base) {
             .replace(/\\/g, "/");
 
 
+        const indent = "    ".repeat(level);
+
+
         if (item.isDirectory()) {
 
-            output += `\n- 📁 [${formatName(item.name)}](./${relative})\n`;
+            output += `${indent}<details>\n`;
 
-            const children = scanFolder(
+            output += `${indent}<summary>📁 <a href="./${relative}">${formatName(item.name)}</a></summary>\n\n`;
+
+
+            output += scanFolder(
                 fullPath,
-                base
+                level + 1
             );
 
 
-            if (children.trim()) {
-
-                output += children
-                    .split("\n")
-                    .map(line => "    " + line)
-                    .join("\n");
-
-                output += "\n";
-
-            }
+            output += `${indent}</details>\n\n`;
 
         }
+
 
 
         if (
@@ -94,7 +92,7 @@ function scanFolder(folder, base) {
             item.name.endsWith(".md")
         ) {
 
-            output += `\n- 📄 [${formatName(item.name)}](./${relative})\n`;
+            output += `${indent}- 📄 [${formatName(item.name)}](./${relative})\n\n`;
 
         }
 
@@ -123,15 +121,18 @@ function generateSection(section) {
     let output = "";
 
 
-    output += `## ${section.icon} ${section.name}\n\n`;
+    output += `<details open>\n`;
+
+    output += `<summary>${section.icon} ${section.name}</summary>\n\n`;
+
 
     output += scanFolder(
         folder,
-        folder
+        0
     );
 
 
-    output += "\n";
+    output += `</details>\n\n`;
 
 
     return output;
@@ -187,6 +188,7 @@ function update() {
     );
 
 }
+
 
 
 update();

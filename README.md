@@ -4,48 +4,91 @@ A personal technical notebook.
 
 <!-- TREE_START -->
 
-## 📚 Guides
+<details open>
+<summary>📚 Guides</summary>
 
+<details>
+<summary>📁 <a href="./Guides/cloudflare">Cloudflare</a></summary>
 
-- 📁 [Cloudflare](./Guides/cloudflare)
+</details>
 
-- 📁 [Github](./Guides/github)
-    
+<details>
+<summary>📁 <a href="./Guides/github">Github</a></summary>
+
     - 📄 [Upload Project To GitHub](./Guides/github/Upload-Project-To-GitHub.md)
-    
 
-- 📁 [Huggingface](./Guides/huggingface)
+</details>
 
-- 📁 [Ubuntu](./Guides/ubuntu)
+<details>
+<summary>📁 <a href="./Guides/huggingface">Huggingface</a></summary>
 
-## 🚀 Projects
+</details>
 
+<details>
+<summary>📁 <a href="./Guides/ubuntu">Ubuntu</a></summary>
 
-- 📁 [BrokenTest](./Projects/BrokenTest)
+</details>
 
-- 📁 [Cloudflare](./Projects/cloudflare)
+</details>
 
-- 📁 [Huggingface](./Projects/huggingface)
+<details open>
+<summary>🚀 Projects</summary>
 
-- 📁 [TestProject2](./Projects/TestProject2)
+<details>
+<summary>📁 <a href="./Projects/BrokenTest">BrokenTest</a></summary>
 
-- 📁 [Ubuntu](./Projects/ubuntu)
+</details>
 
-## 🧩 Templates
+<details>
+<summary>📁 <a href="./Projects/cloudflare">Cloudflare</a></summary>
 
+</details>
 
-- 📁 [Cloudflare](./Templates/cloudflare)
+<details>
+<summary>📁 <a href="./Projects/huggingface">Huggingface</a></summary>
 
-- 📁 [Github](./Templates/github)
-    
+</details>
+
+<details>
+<summary>📁 <a href="./Projects/TestProject2">TestProject2</a></summary>
+
+</details>
+
+<details>
+<summary>📁 <a href="./Projects/ubuntu">Ubuntu</a></summary>
+
+</details>
+
+</details>
+
+<details open>
+<summary>🧩 Templates</summary>
+
+<details>
+<summary>📁 <a href="./Templates/cloudflare">Cloudflare</a></summary>
+
+</details>
+
+<details>
+<summary>📁 <a href="./Templates/github">Github</a></summary>
+
     - 📄 [Upload Project To GitHub](./Templates/github/Upload-Project-To-GitHub.md)
-    
 
-- 📁 [Huggingface](./Templates/huggingface)
+</details>
+
+<details>
+<summary>📁 <a href="./Templates/huggingface">Huggingface</a></summary>
+
+</details>
 
 - 📄 [README Template](./Templates/README-template.md)
 
-- 📁 [Ubuntu](./Templates/ubuntu)
+<details>
+<summary>📁 <a href="./Templates/ubuntu">Ubuntu</a></summary>
+
+</details>
+
+</details>
 
 <!-- TREE_END -->
 
