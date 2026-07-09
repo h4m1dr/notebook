@@ -1,4 +1,3 @@
----
 
 # Check Repository Status
 
@@ -18,7 +17,7 @@ Displays:
 * Current branch
 * Staged changes
 
----
+
 
 ### View commit history
 
