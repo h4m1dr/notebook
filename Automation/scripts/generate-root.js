@@ -1,139 +1,89 @@
 const fs = require("fs");
 const path = require("path");
 
+const { scanFolder } = require("../core/scanner");
+const { renderTree } = require("../core/renderer");
+
+
 const ROOT = path.join(__dirname, "../../");
-const README = path.join(ROOT, "README.md");
+
+const README = path.join(
+    ROOT,
+    "README.md"
+);
+
 
 const START = "<!-- TREE_START -->";
 const END = "<!-- TREE_END -->";
 
 
-const SECTIONS = [
+
+const SHOW_ROOT = [
     {
-        name: "Guides",
+        folder: "Guides",
         icon: "📚"
     },
     {
-        name: "Projects",
+        folder: "Projects",
         icon: "🚀"
     },
     {
-        name: "Templates",
+        folder: "Templates",
         icon: "🧩"
     }
 ];
 
 
-function formatName(name) {
 
-    return name
-        .replace(/[-_]/g, " ")
-        .replace(".md", "")
-        .replace(/\b\w/g, c => c.toUpperCase());
+function generateRootTree() {
 
-}
-
-
-
-function treePrefix(level, last) {
-
-    if (level === 0) {
-        return "";
-    }
-
-
-    let prefix = "";
-
-
-    for (let i = 1; i < level; i++) {
-        prefix += "│   ";
-    }
-
-
-    prefix += last ? "└── " : "├── ";
-
-    return prefix;
-
-}
-
-
-
-function scanFolder(folder, level = 0) {
 
     let output = "";
 
-    const items = fs.readdirSync(folder, {
-        withFileTypes: true
-    })
-    .filter(item => item.name !== "README.md")
-    .sort((a, b) => {
 
-        if (a.isDirectory() && !b.isDirectory()) {
-            return -1;
-        }
-
-        if (!a.isDirectory() && b.isDirectory()) {
-            return 1;
-        }
-
-        return a.name.localeCompare(b.name);
-
-    });
+    for (const item of SHOW_ROOT) {
 
 
-    items.forEach((item, index) => {
-
-
-        const isLast = index === items.length - 1;
-
-
-        const fullPath = path.join(
-            folder,
-            item.name
+        const folderPath = path.join(
+            ROOT,
+            item.folder
         );
 
 
-        const relative = path
-            .relative(ROOT, fullPath)
-            .replace(/\\/g, "/");
-
-
-        const prefix = treePrefix(
-            level,
-            isLast
+        let tree = scanFolder(
+            folderPath,
+            ROOT
         );
 
 
-        if (item.isDirectory()) {
+        tree.name = item.icon + " " + item.folder;
 
 
-            output += `<details>\n`;
+        output += `<details open>\n`;
 
-            output += `<summary>${prefix}📁 <a href="./${relative}">${formatName(item.name)}</a></summary>\n\n`;
+        output += `<summary>\n`;
+
+        output += `<a href="./${item.folder}">${tree.name}</a>\n`;
+
+        output += `</summary>\n\n`;
 
 
-            output += scanFolder(
-                fullPath,
-                level + 1
+        tree.children.forEach((child, index) => {
+
+
+            output += renderTree(
+                child,
+                0,
+                index === tree.children.length - 1
             );
 
 
-            output += `</details>\n\n`;
-
-        }
+        });
 
 
-        if (
-            item.isFile() &&
-            item.name.endsWith(".md")
-        ) {
+        output += `</details>\n\n`;
 
-            output += `${prefix}📄 <a href="./${relative}">${formatName(item.name)}</a>\n\n`;
-
-        }
-
-
-    });
+    }
 
 
     return output;
@@ -142,62 +92,8 @@ function scanFolder(folder, level = 0) {
 
 
 
-function generateSection(section) {
+function updateReadme() {
 
-
-    const folder = path.join(
-        ROOT,
-        section.name
-    );
-
-
-    if (!fs.existsSync(folder)) {
-        return "";
-    }
-
-
-    let output = "";
-
-
-    output += `<details open>\n`;
-
-    output += `<summary>${section.icon} ${section.name}</summary>\n\n`;
-
-
-    output += scanFolder(
-        folder,
-        0
-    );
-
-
-    output += `</details>\n\n`;
-
-
-    return output;
-
-}
-
-
-
-function generate() {
-
-    let output = "";
-
-
-    for (const section of SECTIONS) {
-
-        output += generateSection(section);
-
-    }
-
-
-    return output.trim();
-
-}
-
-
-
-function update() {
 
     let content = fs.readFileSync(
         README,
@@ -205,13 +101,17 @@ function update() {
     );
 
 
-    const tree = generate();
+    const tree = generateRootTree();
+
 
 
     content = content.replace(
-        new RegExp(`${START}[\\s\\S]*?${END}`),
-        `${START}\n\n${tree}\n\n${END}`
+        new RegExp(
+            `${START}[\\s\\S]*?${END}`
+        ),
+        `${START}\n\n${tree}${END}`
     );
+
 
 
     fs.writeFileSync(
@@ -221,6 +121,7 @@ function update() {
     );
 
 
+
     console.log(
         "Root README updated."
     );
@@ -228,4 +129,5 @@ function update() {
 }
 
 
-update();
+
+updateReadme();

@@ -5,84 +5,116 @@ A personal technical notebook.
 <!-- TREE_START -->
 
 <details open>
-<summary>📚 Guides</summary>
+<summary>
+<a href="./Guides">📚 Guides</a>
+</summary>
 
 <details>
-<summary>📁 <a href="./Guides/cloudflare">Cloudflare</a></summary>
+<summary>
+📁 <a href="./Guides/cloudflare">Cloudflare</a>
+</summary>
 
 </details>
 
 <details>
-<summary>📁 <a href="./Guides/github">Github</a></summary>
+<summary>
+📁 <a href="./Guides/github">Github</a>
+</summary>
 
-└── 📄 <a href="./Guides/github/Upload-Project-To-GitHub.md">Upload Project To GitHub</a>
-
-</details>
-
-<details>
-<summary>📁 <a href="./Guides/huggingface">Huggingface</a></summary>
+&nbsp;&nbsp;&nbsp;&nbsp;└── 📄 <a href="./Guides/github/Upload-Project-To-GitHub.md">Upload Project To GitHub</a>
 
 </details>
 
 <details>
-<summary>📁 <a href="./Guides/ubuntu">Ubuntu</a></summary>
+<summary>
+📁 <a href="./Guides/huggingface">Huggingface</a>
+</summary>
+
+</details>
+
+<details>
+<summary>
+📁 <a href="./Guides/ubuntu">Ubuntu</a>
+</summary>
 
 </details>
 
 </details>
 
 <details open>
-<summary>🚀 Projects</summary>
+<summary>
+<a href="./Projects">🚀 Projects</a>
+</summary>
 
 <details>
-<summary>📁 <a href="./Projects/BrokenTest">BrokenTest</a></summary>
+<summary>
+📁 <a href="./Projects/BrokenTest">BrokenTest</a>
+</summary>
 
 </details>
 
 <details>
-<summary>📁 <a href="./Projects/cloudflare">Cloudflare</a></summary>
+<summary>
+📁 <a href="./Projects/cloudflare">Cloudflare</a>
+</summary>
 
 </details>
 
 <details>
-<summary>📁 <a href="./Projects/huggingface">Huggingface</a></summary>
+<summary>
+📁 <a href="./Projects/huggingface">Huggingface</a>
+</summary>
 
 </details>
 
 <details>
-<summary>📁 <a href="./Projects/TestProject2">TestProject2</a></summary>
+<summary>
+📁 <a href="./Projects/TestProject2">TestProject2</a>
+</summary>
 
 </details>
 
 <details>
-<summary>📁 <a href="./Projects/ubuntu">Ubuntu</a></summary>
+<summary>
+📁 <a href="./Projects/ubuntu">Ubuntu</a>
+</summary>
 
 </details>
 
 </details>
 
 <details open>
-<summary>🧩 Templates</summary>
+<summary>
+<a href="./Templates">🧩 Templates</a>
+</summary>
 
 <details>
-<summary>📁 <a href="./Templates/cloudflare">Cloudflare</a></summary>
+<summary>
+📁 <a href="./Templates/cloudflare">Cloudflare</a>
+</summary>
 
 </details>
 
 <details>
-<summary>📁 <a href="./Templates/github">Github</a></summary>
+<summary>
+📁 <a href="./Templates/github">Github</a>
+</summary>
 
-└── 📄 <a href="./Templates/github/Upload-Project-To-GitHub.md">Upload Project To GitHub</a>
-
-</details>
-
-<details>
-<summary>📁 <a href="./Templates/huggingface">Huggingface</a></summary>
+&nbsp;&nbsp;&nbsp;&nbsp;└── 📄 <a href="./Templates/github/Upload-Project-To-GitHub.md">Upload Project To GitHub</a>
 
 </details>
 
 <details>
-<summary>📁 <a href="./Templates/ubuntu">Ubuntu</a></summary>
+<summary>
+📁 <a href="./Templates/huggingface">Huggingface</a>
+</summary>
+
+</details>
+
+<details>
+<summary>
+📁 <a href="./Templates/ubuntu">Ubuntu</a>
+</summary>
 
 </details>
 
