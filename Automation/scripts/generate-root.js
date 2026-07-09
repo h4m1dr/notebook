@@ -6,29 +6,24 @@ const { renderTree } = require("../core/renderer");
 
 
 const ROOT = path.join(__dirname, "../../");
-
-const README = path.join(
-    ROOT,
-    "README.md"
-);
+const README = path.join(ROOT, "README.md");
 
 
 const START = "<!-- TREE_START -->";
 const END = "<!-- TREE_END -->";
 
 
-
 const SHOW_ROOT = [
     {
-        folder: "Guides",
+        name: "Guides",
         icon: "📚"
     },
     {
-        folder: "Projects",
+        name: "Projects",
         icon: "🚀"
     },
     {
-        folder: "Templates",
+        name: "Templates",
         icon: "🧩"
     }
 ];
@@ -37,58 +32,52 @@ const SHOW_ROOT = [
 
 function generateRootTree() {
 
-
     let output = "";
 
 
-    for (const item of SHOW_ROOT) {
+    SHOW_ROOT.forEach(folder => {
 
 
-        const folderPath = path.join(
+        const fullPath = path.join(
             ROOT,
-            item.folder
+            folder.name
         );
 
 
-        let tree = scanFolder(
-            folderPath,
-            ROOT
+        const node = {
+
+            name: folder.name,
+
+            path: "./" + folder.name,
+
+            type: "folder",
+
+            icon: folder.icon,
+
+            children: scanFolder(
+                fullPath,
+                ROOT
+            )
+
+        };
+
+
+        output += renderTree(
+            node,
+            0,
+            true
         );
 
 
-        tree.name = item.icon + " " + item.folder;
+        output += "\n";
 
-
-        output += `<details open>\n`;
-
-        output += `<summary>\n`;
-
-        output += `<a href="./${item.folder}">${tree.name}</a>\n`;
-
-        output += `</summary>\n\n`;
-
-
-        tree.children.forEach((child, index) => {
-
-
-            output += renderTree(
-                child,
-                0,
-                index === tree.children.length - 1
-            );
-
-
-        });
-
-
-        output += `</details>\n\n`;
-
-    }
+    });
 
 
     return output;
 
 }
+
 
 
 
@@ -106,10 +95,8 @@ function updateReadme() {
 
 
     content = content.replace(
-        new RegExp(
-            `${START}[\\s\\S]*?${END}`
-        ),
-        `${START}\n\n${tree}${END}`
+        new RegExp(`${START}[\\s\\S]*?${END}`),
+        `${START}\n\n${tree}\n\n${END}`
     );
 
 
@@ -119,7 +106,6 @@ function updateReadme() {
         content,
         "utf8"
     );
-
 
 
     console.log(

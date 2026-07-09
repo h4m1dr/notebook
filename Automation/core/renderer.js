@@ -1,76 +1,159 @@
-function escapeHtml(text) {
+function formatName(name) {
 
-    return text
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;");
+    if (typeof name === "object") {
+
+        name = name.name;
+
+    }
+
+
+    return String(name)
+        .replace(/[-_]/g, " ")
+        .replace(".md", "")
+        .replace(/\b\w/g, c => c.toUpperCase());
 
 }
 
 
 
-function renderTree(node, level = 0, isLast = true) {
+function getPrefix(level, last) {
 
-    let output = "";
-
-
-    const indent = "&nbsp;&nbsp;&nbsp;&nbsp;".repeat(level);
-
-
-    const branch = level === 0
-        ? ""
-        : (isLast ? "└── " : "├── ");
+    if (!level) {
+        return "";
+    }
 
 
-
-    if (node.type === "folder") {
-
-
-        output += `<details>\n`;
-
-        output += `<summary>\n`;
-
-        output += `${indent}${branch}📁 <a href="${node.link}">${escapeHtml(node.name)}</a>\n`;
-
-        output += `</summary>\n\n`;
+    let prefix = "";
 
 
-        if (node.children && node.children.length) {
+    for (let i = 1; i < level; i++) {
+
+        prefix += "│   ";
+
+    }
 
 
-            node.children.forEach((child, index) => {
-
-                output += renderTree(
-                    child,
-                    level + 1,
-                    index === node.children.length - 1
-                );
-
-            });
-
-        }
+    prefix += last
+        ? "└── "
+        : "├── ";
 
 
-        output += `</details>\n\n`;
+    return prefix;
+
+}
+
+
+
+
+function renderTree(
+    item,
+    link,
+    children,
+    level = 0,
+    last = false,
+    isFile = false
+) {
+
+
+    const name = formatName(item);
+
+
+    const prefix = getPrefix(
+        level,
+        last
+    );
+
+
+    if (isFile) {
+
+
+        return `
+
+<div style="margin-left:${level * 25}px">
+
+${prefix}
+📄 <a href="${link}">
+${name}
+</a>
+
+</div>
+
+`;
 
     }
 
 
 
-    if (node.type === "file") {
+    return `
+
+<details>
+
+<summary>
+
+${prefix}
+📁 <a href="${link}">
+${name}
+</a>
+
+</summary>
 
 
-        output += `${indent}${branch}📄 <a href="${node.link}">${escapeHtml(node.name)}</a>\n\n`;
+<div style="margin-left:${(level + 1) * 25}px">
 
-    }
+${children}
+
+</div>
 
 
-    return output;
+</details>
+
+
+`;
+
+}
+
+
+
+
+function renderRoot(
+    title,
+    link,
+    children
+) {
+
+
+    return `
+
+<details open>
+
+<summary>
+
+📚 <a href="${link}">
+${title}
+</a>
+
+</summary>
+
+
+<div style="margin-left:25px">
+
+${children}
+
+</div>
+
+
+</details>
+
+
+`;
 
 }
 
 
 
 module.exports = {
-    renderTree
+
+    renderTree,
+    renderRoot
+
 };
