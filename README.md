@@ -7,86 +7,86 @@ A personal technical notebook.
 <details open>
 <summary>📚 Guides</summary>
 
-<details>
-<summary>📁 <a href="./Guides/cloudflare">Cloudflare</a></summary>
+&nbsp;&nbsp;&nbsp;&nbsp;<details>
+&nbsp;&nbsp;&nbsp;&nbsp;<summary>📁 <a href="./Guides/cloudflare">Cloudflare</a></summary>
 
-</details>
+&nbsp;&nbsp;&nbsp;&nbsp;</details>
 
-<details>
-<summary>📁 <a href="./Guides/github">Github</a></summary>
+&nbsp;&nbsp;&nbsp;&nbsp;<details>
+&nbsp;&nbsp;&nbsp;&nbsp;<summary>📁 <a href="./Guides/github">Github</a></summary>
 
-    - 📄 [Upload Project To GitHub](./Guides/github/Upload-Project-To-GitHub.md)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- 📄 <a href="./Guides/github/Upload-Project-To-GitHub.md">Upload Project To GitHub</a>
 
-</details>
+&nbsp;&nbsp;&nbsp;&nbsp;</details>
 
-<details>
-<summary>📁 <a href="./Guides/huggingface">Huggingface</a></summary>
+&nbsp;&nbsp;&nbsp;&nbsp;<details>
+&nbsp;&nbsp;&nbsp;&nbsp;<summary>📁 <a href="./Guides/huggingface">Huggingface</a></summary>
 
-</details>
+&nbsp;&nbsp;&nbsp;&nbsp;</details>
 
-<details>
-<summary>📁 <a href="./Guides/ubuntu">Ubuntu</a></summary>
+&nbsp;&nbsp;&nbsp;&nbsp;<details>
+&nbsp;&nbsp;&nbsp;&nbsp;<summary>📁 <a href="./Guides/ubuntu">Ubuntu</a></summary>
 
-</details>
+&nbsp;&nbsp;&nbsp;&nbsp;</details>
 
 </details>
 
 <details open>
 <summary>🚀 Projects</summary>
 
-<details>
-<summary>📁 <a href="./Projects/BrokenTest">BrokenTest</a></summary>
+&nbsp;&nbsp;&nbsp;&nbsp;<details>
+&nbsp;&nbsp;&nbsp;&nbsp;<summary>📁 <a href="./Projects/BrokenTest">BrokenTest</a></summary>
 
-</details>
+&nbsp;&nbsp;&nbsp;&nbsp;</details>
 
-<details>
-<summary>📁 <a href="./Projects/cloudflare">Cloudflare</a></summary>
+&nbsp;&nbsp;&nbsp;&nbsp;<details>
+&nbsp;&nbsp;&nbsp;&nbsp;<summary>📁 <a href="./Projects/cloudflare">Cloudflare</a></summary>
 
-</details>
+&nbsp;&nbsp;&nbsp;&nbsp;</details>
 
-<details>
-<summary>📁 <a href="./Projects/huggingface">Huggingface</a></summary>
+&nbsp;&nbsp;&nbsp;&nbsp;<details>
+&nbsp;&nbsp;&nbsp;&nbsp;<summary>📁 <a href="./Projects/huggingface">Huggingface</a></summary>
 
-</details>
+&nbsp;&nbsp;&nbsp;&nbsp;</details>
 
-<details>
-<summary>📁 <a href="./Projects/TestProject2">TestProject2</a></summary>
+&nbsp;&nbsp;&nbsp;&nbsp;<details>
+&nbsp;&nbsp;&nbsp;&nbsp;<summary>📁 <a href="./Projects/TestProject2">TestProject2</a></summary>
 
-</details>
+&nbsp;&nbsp;&nbsp;&nbsp;</details>
 
-<details>
-<summary>📁 <a href="./Projects/ubuntu">Ubuntu</a></summary>
+&nbsp;&nbsp;&nbsp;&nbsp;<details>
+&nbsp;&nbsp;&nbsp;&nbsp;<summary>📁 <a href="./Projects/ubuntu">Ubuntu</a></summary>
 
-</details>
+&nbsp;&nbsp;&nbsp;&nbsp;</details>
 
 </details>
 
 <details open>
 <summary>🧩 Templates</summary>
 
-<details>
-<summary>📁 <a href="./Templates/cloudflare">Cloudflare</a></summary>
+&nbsp;&nbsp;&nbsp;&nbsp;<details>
+&nbsp;&nbsp;&nbsp;&nbsp;<summary>📁 <a href="./Templates/cloudflare">Cloudflare</a></summary>
 
-</details>
+&nbsp;&nbsp;&nbsp;&nbsp;</details>
 
-<details>
-<summary>📁 <a href="./Templates/github">Github</a></summary>
+&nbsp;&nbsp;&nbsp;&nbsp;<details>
+&nbsp;&nbsp;&nbsp;&nbsp;<summary>📁 <a href="./Templates/github">Github</a></summary>
 
-    - 📄 [Upload Project To GitHub](./Templates/github/Upload-Project-To-GitHub.md)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- 📄 <a href="./Templates/github/Upload-Project-To-GitHub.md">Upload Project To GitHub</a>
 
-</details>
+&nbsp;&nbsp;&nbsp;&nbsp;</details>
 
-<details>
-<summary>📁 <a href="./Templates/huggingface">Huggingface</a></summary>
+&nbsp;&nbsp;&nbsp;&nbsp;<details>
+&nbsp;&nbsp;&nbsp;&nbsp;<summary>📁 <a href="./Templates/huggingface">Huggingface</a></summary>
 
-</details>
+&nbsp;&nbsp;&nbsp;&nbsp;</details>
 
-- 📄 [README Template](./Templates/README-template.md)
+&nbsp;&nbsp;&nbsp;&nbsp;- 📄 <a href="./Templates/README-template.md">README Template</a>
 
-<details>
-<summary>📁 <a href="./Templates/ubuntu">Ubuntu</a></summary>
+&nbsp;&nbsp;&nbsp;&nbsp;<details>
+&nbsp;&nbsp;&nbsp;&nbsp;<summary>📁 <a href="./Templates/ubuntu">Ubuntu</a></summary>
 
-</details>
+&nbsp;&nbsp;&nbsp;&nbsp;</details>
 
 </details>
 

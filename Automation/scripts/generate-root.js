@@ -35,7 +35,15 @@ function formatName(name) {
 
 
 
-function scanFolder(folder, level = 0) {
+function indent(level) {
+
+    return "&nbsp;&nbsp;&nbsp;&nbsp;".repeat(level);
+
+}
+
+
+
+function scanFolder(folder, level) {
 
     let output = "";
 
@@ -65,14 +73,13 @@ function scanFolder(folder, level = 0) {
             .replace(/\\/g, "/");
 
 
-        const indent = "    ".repeat(level);
-
 
         if (item.isDirectory()) {
 
-            output += `${indent}<details>\n`;
 
-            output += `${indent}<summary>📁 <a href="./${relative}">${formatName(item.name)}</a></summary>\n\n`;
+            output += `${indent(level)}<details>\n`;
+
+            output += `${indent(level)}<summary>📁 <a href="./${relative}">${formatName(item.name)}</a></summary>\n\n`;
 
 
             output += scanFolder(
@@ -81,7 +88,7 @@ function scanFolder(folder, level = 0) {
             );
 
 
-            output += `${indent}</details>\n\n`;
+            output += `${indent(level)}</details>\n\n`;
 
         }
 
@@ -92,7 +99,7 @@ function scanFolder(folder, level = 0) {
             item.name.endsWith(".md")
         ) {
 
-            output += `${indent}- 📄 [${formatName(item.name)}](./${relative})\n\n`;
+            output += `${indent(level)}- 📄 <a href="./${relative}">${formatName(item.name)}</a>\n\n`;
 
         }
 
@@ -105,7 +112,8 @@ function scanFolder(folder, level = 0) {
 
 
 
-function generateSection(section) {
+function createSection(section) {
+
 
     const folder = path.join(
         ROOT,
@@ -128,7 +136,7 @@ function generateSection(section) {
 
     output += scanFolder(
         folder,
-        0
+        1
     );
 
 
@@ -148,7 +156,7 @@ function generate() {
 
     for (const section of SECTIONS) {
 
-        output += generateSection(section);
+        output += createSection(section);
 
     }
 
@@ -160,6 +168,7 @@ function generate() {
 
 
 function update() {
+
 
     let content = fs.readFileSync(
         README,
@@ -188,7 +197,6 @@ function update() {
     );
 
 }
-
 
 
 update();
