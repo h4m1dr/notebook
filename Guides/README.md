@@ -4,6 +4,15 @@ Practical guides and tutorials.
 
 <!-- AUTO_INDEX_START -->
 
-- [Upload Project To GitHub](./github/Upload-Project-To-GitHub.md)
+- 📁 [Cloudflare](./cloudflare)
+
+- 📁 [Github](./github)
+    
+    - 📄 [Upload Project To GitHub](./github/Upload-Project-To-GitHub.md)
+    
+
+- 📁 [Huggingface](./huggingface)
+
+- 📁 [Ubuntu](./ubuntu)
 
 <!-- AUTO_INDEX_END -->

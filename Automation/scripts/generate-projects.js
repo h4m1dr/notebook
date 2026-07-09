@@ -8,100 +8,117 @@ const START = "<!-- AUTO_INDEX_START -->";
 const END = "<!-- AUTO_INDEX_END -->";
 
 
-function getReadmeFiles(dir) {
-    let files = [];
+function formatName(name) {
 
-    const items = fs.readdirSync(dir, {
+    return name
+        .replace(/[-_]/g, " ")
+        .replace(".md", "")
+        .replace(/\b\w/g, char => char.toUpperCase());
+
+}
+
+
+
+function findProjects() {
+
+    const projects = [];
+
+    const folders = fs.readdirSync(ROOT, {
         withFileTypes: true
     });
 
-    for (const item of items) {
-        const fullPath = path.join(dir, item.name);
 
-        if (item.isDirectory()) {
-            files = files.concat(
-                getReadmeFiles(fullPath)
-            );
+    for (const folder of folders) {
+
+        if (!folder.isDirectory()) {
+            continue;
         }
 
-        if (
-            item.isFile() &&
-            item.name.toLowerCase() === "readme.md" &&
-            fullPath !== README
-        ) {
-            files.push(fullPath);
+
+        const projectPath = path.join(
+            ROOT,
+            folder.name
+        );
+
+
+        const projectReadme = path.join(
+            projectPath,
+            "README.md"
+        );
+
+
+        if (fs.existsSync(projectReadme)) {
+
+            projects.push({
+                name: folder.name,
+                path: projectReadme
+            });
+
         }
+
     }
 
-    return files;
+
+    return projects;
+
 }
 
-
-function getTitle(file) {
-    const content = fs.readFileSync(
-        file,
-        "utf8"
-    );
-
-    const match = content.match(
-        /^#\s+(.+)/m
-    );
-
-    if (match) {
-        return match[1].trim();
-    }
-
-    return path.basename(
-        path.dirname(file)
-    );
-}
 
 
 function generateIndex() {
 
-    const files = getReadmeFiles(ROOT);
+    const projects = findProjects();
 
-    return files.map(file => {
+
+    let output = "";
+
+
+    for (const project of projects) {
 
         const relative = path
-            .relative(ROOT, file)
+            .relative(ROOT, project.path)
             .replace(/\\/g, "/");
 
-        const title = getTitle(file);
 
-        return `- [${title}](${relative})`;
+        output += `- 🚀 [${formatName(project.name)}](${relative})\n`;
 
-    }).join("\n");
+    }
+
+
+    return output.trim();
+
 }
+
 
 
 function updateReadme() {
 
-    const content = fs.readFileSync(
+    let content = fs.readFileSync(
         README,
         "utf8"
     );
 
+
     const index = generateIndex();
 
-    const updated = content.replace(
-        new RegExp(
-            `${START}[\\s\\S]*?${END}`
-        ),
+
+    content = content.replace(
+        new RegExp(`${START}[\\s\\S]*?${END}`),
         `${START}\n\n${index}\n\n${END}`
     );
 
 
     fs.writeFileSync(
         README,
-        updated,
+        content,
         "utf8"
     );
 
 
     console.log(
-        "Projects index updated."
+        "Projects README updated."
     );
+
 }
 
 

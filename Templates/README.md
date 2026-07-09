@@ -13,5 +13,10 @@ Examples:
 
 <!-- AUTO_INDEX_START -->
 
+- 📁 [Cloudflare](./cloudflare)
+- 📁 [Github](./github)
+- 📁 [Huggingface](./huggingface)
+- 📄 [README Template](./README-template.md)
+- 📁 [Ubuntu](./ubuntu)
 
 <!-- AUTO_INDEX_END -->

@@ -1,11 +1,27 @@
 const fs = require("fs");
 const path = require("path");
 
-const ROOT = path.join(__dirname, "../../Guides");
+const ROOT = path.join(__dirname, "../../");
 const README = path.join(ROOT, "README.md");
 
-const START = "<!-- AUTO_INDEX_START -->";
-const END = "<!-- AUTO_INDEX_END -->";
+const START = "<!-- TREE_START -->";
+const END = "<!-- TREE_END -->";
+
+
+const SECTIONS = [
+    {
+        name: "Guides",
+        icon: "📚"
+    },
+    {
+        name: "Projects",
+        icon: "🚀"
+    },
+    {
+        name: "Templates",
+        icon: "🧩"
+    }
+];
 
 
 function formatName(name) {
@@ -19,24 +35,27 @@ function formatName(name) {
 
 
 
-function scanDirectory(dir) {
+function scanFolder(folder, base) {
 
     let output = "";
 
-    const items = fs.readdirSync(dir, {
+    const items = fs.readdirSync(folder, {
         withFileTypes: true
     });
 
 
     for (const item of items) {
 
-        if (item.name === "README.md") {
+        if (
+            item.name === "README.md" ||
+            item.name === ".git"
+        ) {
             continue;
         }
 
 
         const fullPath = path.join(
-            dir,
+            folder,
             item.name
         );
 
@@ -50,8 +69,9 @@ function scanDirectory(dir) {
 
             output += `\n- 📁 [${formatName(item.name)}](./${relative})\n`;
 
-            const children = scanDirectory(
-                fullPath
+            const children = scanFolder(
+                fullPath,
+                base
             );
 
 
@@ -87,16 +107,58 @@ function scanDirectory(dir) {
 
 
 
-function generateIndex() {
+function generateSection(section) {
 
-    return scanDirectory(ROOT)
-        .trim();
+    const folder = path.join(
+        ROOT,
+        section.name
+    );
+
+
+    if (!fs.existsSync(folder)) {
+        return "";
+    }
+
+
+    let output = "";
+
+
+    output += `## ${section.icon} ${section.name}\n\n`;
+
+    output += scanFolder(
+        folder,
+        folder
+    );
+
+
+    output += "\n";
+
+
+    return output;
 
 }
 
 
 
-function updateReadme() {
+function generate() {
+
+    let output = "";
+
+
+    for (const section of SECTIONS) {
+
+        output += generateSection(section);
+
+    }
+
+
+    return output.trim();
+
+}
+
+
+
+function update() {
 
     let content = fs.readFileSync(
         README,
@@ -104,12 +166,12 @@ function updateReadme() {
     );
 
 
-    const index = generateIndex();
+    const tree = generate();
 
 
     content = content.replace(
         new RegExp(`${START}[\\s\\S]*?${END}`),
-        `${START}\n\n${index}\n\n${END}`
+        `${START}\n\n${tree}\n\n${END}`
     );
 
 
@@ -121,10 +183,10 @@ function updateReadme() {
 
 
     console.log(
-        "Guides README updated."
+        "Root README updated."
     );
 
 }
 
 
-updateReadme();
+update();
