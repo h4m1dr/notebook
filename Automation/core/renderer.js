@@ -1,12 +1,9 @@
 function formatName(name) {
-
     return String(name)
         .replace(/[-_]/g, " ")
         .replace(".md", "")
         .replace(/\b\w/g, c => c.toUpperCase());
-
 }
-
 
 
 function treePrefix(level, last) {
@@ -15,24 +12,15 @@ function treePrefix(level, last) {
         return "";
     }
 
-
     let prefix = "";
 
-
     for (let i = 1; i < level; i++) {
-
         prefix += "│   ";
-
     }
 
-
-    prefix += last
-        ? "└── "
-        : "├── ";
-
+    prefix += last ? "└── " : "├── ";
 
     return prefix;
-
 }
 
 
@@ -48,30 +36,18 @@ function renderTree(node, level = 0) {
     );
 
 
-    const icon = node.type === "file"
-        ? "📄"
-        : "📁";
-
-
-
     if (node.type === "folder") {
-
 
         output += `<details>\n`;
 
         output += `<summary>\n`;
 
-        output += `${prefix}${icon} <a href="${node.path}">${formatName(node.name)}</a>\n`;
+        output += `${prefix}📁 <a href="./${node.path}">${formatName(node.name)}</a>\n`;
 
         output += `</summary>\n\n`;
 
 
-
-        if (
-            node.children &&
-            node.children.length > 0
-        ) {
-
+        if (node.children && node.children.length > 0) {
 
             node.children.forEach(child => {
 
@@ -82,21 +58,20 @@ function renderTree(node, level = 0) {
 
             });
 
-
         }
 
 
         output += `</details>\n\n`;
 
-
-    }
-    else {
-
-
-        output += `${prefix}${icon} <a href="${node.path}">${formatName(node.name)}</a>\n\n`;
-
     }
 
+
+
+    if (node.type === "file") {
+
+        output += `${prefix}📄 <a href="./${node.path}">${formatName(node.name)}</a>\n\n`;
+
+    }
 
 
     return output;
@@ -106,5 +81,6 @@ function renderTree(node, level = 0) {
 
 
 module.exports = {
-    renderTree
+    renderTree,
+    formatName
 };
