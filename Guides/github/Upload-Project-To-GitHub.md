@@ -270,12 +270,9 @@ git push
 ## Complete Daily Workflow
 
 ```bash
-git status
-git diff
 git add .
-git commit -m "Describe your changes"
-git pull --rebase
-git push
+git commit -m "new update"
+git push -u origin main
 ```
 
 ---
