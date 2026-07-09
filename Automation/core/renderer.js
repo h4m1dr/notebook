@@ -1,13 +1,6 @@
 function formatName(name) {
 
-    if (typeof name === "object") {
-
-        name = name.name;
-
-    }
-
-
-    return String(name)
+    return name
         .replace(/[-_]/g, " ")
         .replace(".md", "")
         .replace(/\b\w/g, c => c.toUpperCase());
@@ -16,144 +9,80 @@ function formatName(name) {
 
 
 
-function getPrefix(level, last) {
-
-    if (!level) {
-        return "";
-    }
+function renderTree(node, level = 0, isRoot = false) {
 
 
-    let prefix = "";
+    let output = "";
 
 
-    for (let i = 1; i < level; i++) {
-
-        prefix += "│   ";
-
-    }
-
-
-    prefix += last
-        ? "└── "
-        : "├── ";
-
-
-    return prefix;
-
-}
+    const indent = "&nbsp;&nbsp;&nbsp;&nbsp;".repeat(level);
 
 
 
-
-function renderTree(
-    item,
-    link,
-    children,
-    level = 0,
-    last = false,
-    isFile = false
-) {
+    if (node.type === "folder") {
 
 
-    const name = formatName(item);
+        output += `<details${isRoot ? " open" : ""}>\n`;
+
+        output += `<summary>\n`;
+
+        output += `${indent}📁 <a href="${node.path}">${formatName(node.name)}</a>\n`;
+
+        output += `</summary>\n\n`;
 
 
-    const prefix = getPrefix(
-        level,
-        last
-    );
+
+        if (node.children && node.children.length > 0) {
 
 
-    if (isFile) {
+            output += `<div style="margin-left:${25 * (level + 1)}px">\n\n`;
 
 
-        return `
+            node.children.forEach((child, index) => {
 
-<div style="margin-left:${level * 25}px">
 
-${prefix}
-📄 <a href="${link}">
-${name}
-</a>
+                const last = index === node.children.length - 1;
 
-</div>
 
-`;
+                output += renderTree(
+                    child,
+                    level + 1,
+                    false
+                );
+
+
+            });
+
+
+            output += `</div>\n\n`;
+
+        }
+
+
+
+        output += `</details>\n\n`;
+
 
     }
 
 
 
-    return `
-
-<details>
-
-<summary>
-
-${prefix}
-📁 <a href="${link}">
-${name}
-</a>
-
-</summary>
+    if (node.type === "file") {
 
 
-<div style="margin-left:${(level + 1) * 25}px">
-
-${children}
-
-</div>
+        output += `${indent}📄 <a href="${node.path}">${formatName(node.name)}</a>\n\n`;
 
 
-</details>
-
-
-`;
-
-}
+    }
 
 
 
-
-function renderRoot(
-    title,
-    link,
-    children
-) {
-
-
-    return `
-
-<details open>
-
-<summary>
-
-📚 <a href="${link}">
-${title}
-</a>
-
-</summary>
-
-
-<div style="margin-left:25px">
-
-${children}
-
-</div>
-
-
-</details>
-
-
-`;
+    return output;
 
 }
 
 
 
 module.exports = {
-
-    renderTree,
-    renderRoot
-
+    renderTree
 };
